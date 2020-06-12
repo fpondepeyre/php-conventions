@@ -1,0 +1,31 @@
+parameters:
+    convention.git_commit_message_matchers: ['/^(fixup! )*(feat|fix|docs|style|refactor|perf|test|chore)(\(.+\)): (.*)\.(\(AGORA-[0-9]+\))?$/']
+
+grumphp:
+    tasks:
+        phpstan:
+            configuration: phpstan.neon
+            triggered_by: ['php']
+            level: 7
+        composer: ~
+        composer_normalize: ~
+        git_blacklist:
+            keywords: ['dd(c', 'die(', 'var_dump(', 'print_f(', 'dump(', 'exit;']
+            triggered_by: ['php']
+        git_commit_message:
+            enforce_capitalized_subject: false
+            enforce_no_subject_trailing_period: false
+            max_body_width: 512
+            max_subject_width: 256
+            matchers:
+                commit_message_format: "%convention.git_commit_message_matchers%"
+        phplint:
+            exclude: ['vendor', 'var']
+        phpcsfixer:
+            config: .php_cs.dist
+            rules: ['@Symfony']
+        phpparser: ~
+        securitychecker: ~
+        xmllint: ~
+        yamllint:
+            parse_custom_tags: true
