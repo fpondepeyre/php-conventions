@@ -1,0 +1,40 @@
+parameters:
+    convention.git_commit_message_matchers: ['/^(fixup! )*(feat|fix|docs|style|refactor|perf|test|chore)(\(.+\)): (.*)\.(\(AGORA-[0-9]+\))?$/']
+    convention.git_commit_message_max_body_width: 512
+    convention.git_commit_message_max_subject_width: 256
+    convention.git_commit_message_enforce_capitalized_subject: false
+    convention.git_commit_message_enforce_no_subject_trailing_period: false
+    convention.git_blacklist_keywords: ['dd(', 'die(', 'var_dump(', 'print_f(', 'dump(', 'exit;']
+    convention.phpstan_level: 7
+    convention.phpcsfixer_rules: ['@Symfony']
+    convention.phplint_exclude: ['vendor', 'var']
+    convention.yamllint_parse_custom_tags: true
+
+grumphp:
+    tasks:
+        phpstan:
+            configuration: phpstan.neon
+            triggered_by: ['php']
+            level: "%convention.phpstan_level%"
+        composer: ~
+        composer_normalize: ~
+        git_blacklist:
+            keywords: "%convention.git_blacklist.keywords%"
+            triggered_by: ['php']
+        git_commit_message:
+            enforce_capitalized_subject: "%convention.enforce_capitalized_subject%"
+            enforce_no_subject_trailing_period: "%convention.enforce_no_subject_trailing_period%"
+            max_body_width: "%convention.git_commit_message_max_body_width%"
+            max_subject_width: "%convention.git_commit_message_max_subject_width%"
+            matchers:
+                commit_message_format: "%convention.git_commit_message_matchers%"
+        phplint:
+            exclude: "%convention.phplint_exclude%"
+        phpcsfixer:
+            config: .php_cs.dist
+            rules: "%convention.phpcsfixer_rules%"
+        phpparser: ~
+        securitychecker: ~
+        xmllint: ~
+        yamllint:
+            parse_custom_tags: "%convention.yamllint_parse_custom_tags%"
