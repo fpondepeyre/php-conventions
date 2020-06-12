@@ -1,0 +1,37 @@
+parameters:
+    git_dir: .
+    bin_dir: bin
+
+    ascii:
+        failed: ~
+        succeeded: ~
+
+    tasks:
+        phpstan:
+            configuration: phpstan.neon
+            triggered_by: ['php']
+            level: 7
+        composer: ~
+        composer_normalize: ~
+        git_conflict: ~
+        git_blacklist:
+            keywords: ['die(', 'var_dump(', 'print_f(', 'dump(', 'exit;']
+            triggered_by: ['php']
+        git_commit_message:
+            enforce_capitalized_subject: false
+            enforce_no_subject_trailing_period: false
+            max_body_width: 512
+            max_subject_width: 256
+            matchers:
+                commit_message_format: '/^(fixup! )*(feat|fix|docs|style|refactor|perf|test|chore)(\(.+\)): (.*)\.(\(AGORA-[0-9]+\))?$/'
+        phplint:
+            exclude: ['vendor', 'var']
+        phpcsfixer:
+            config: .php_cs.dist
+            rules: ['@Symfony']
+        phpparser: ~
+        securitychecker: ~
+        twigcs: ~
+        xmllint: ~
+        yamllint:
+            parse_custom_tags: true

@@ -1,0 +1,30 @@
+{
+    "name": "agora/php-conventions",
+    "description": "PHP conventions based on Grumphp tasks.",
+    "require": {
+        "php": "^7.2.5",
+        "ergebnis/composer-normalize": "^2.5",
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "friendsoftwig/twigcs": "^3.2",
+        "php-parallel-lint/php-parallel-lint": "^1.1",
+        "phpro/grumphp": "^0.16 || ^0.17",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-deprecation-rules": "^0.12",
+        "phpstan/phpstan-strict-rules": "^0.12",
+        "sensiolabs/security-checker": "^6.0",
+        "symfony/yaml": "^4.4 || ^5.1",
+        "wearejust/grumphp-extra-tasks": "^2.2"
+    },
+    "suggest": {
+        "phpstan/phpstan-strict-rules": "PHPStan rules providing extra strict and opinionated code style."
+    },
+    "autoload": {
+        "psr-4": {
+            "Agora\\PhpConventions\\": "./src/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
